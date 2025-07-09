@@ -38,32 +38,25 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends
 		T right = array[rightIndex];
 		T meio = array[(leftIndex+rightIndex)/2];
 
-		T[] auxiliar = Arrays.copyOf(array, 3);
-		auxiliar[0] = left;
-		auxiliar[1] = meio;
-		auxiliar[2] = right;
-
-		int min = 0;
-		for (int i = 0; i < 3; i++) {
-			if (auxiliar[i].compareTo(auxiliar[min]) < 0)
-				min = i;
-		}
-		int b = 0;
-		for (int j = 0; j < 3; j++) {
-			if ((auxiliar[j].compareTo(auxiliar[b]) < 0) && (auxiliar[j].compareTo(auxiliar[min]) > 0))
-				indPivot = j;
+		if ((left.compareTo(meio) <= 0 && meio.compareTo(right) <= 0) || (right.compareTo(meio) <= 0 && meio.compareTo(left) <= 0)) {
+			indPivot = (leftIndex + rightIndex) / 2;
+		} else if ((meio.compareTo(left) <= 0 && left.compareTo(right) <= 0) || (right.compareTo(left) <= 0 && left.compareTo(meio) <= 0)) {
+			indPivot = leftIndex;
+		} else {
+			indPivot = rightIndex;
 		}
 		
-		T pivot = auxiliar[indPivot];
-		int i = leftIndex;
+		Util.swap(array, indPivot, rightIndex);
+		
+		int i = leftIndex - 1;
 
-		for (int j= leftIndex+1; j <= rightIndex; j++) {
-			if (array[j].compareTo(pivot) <= 0) {
+		for (int j= leftIndex; j < rightIndex; j++) {
+			if (array[j].compareTo(array[rightIndex]) <= 0) {
 				i++;
 				Util.swap(array, i, j);
 			}
 		}
-		Util.swap(array, leftIndex, i);
-		return i;
+		Util.swap(array, rightIndex, i + 1);
+		return i+1;
 	}
 }
