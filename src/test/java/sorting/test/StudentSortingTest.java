@@ -18,6 +18,11 @@ public class StudentSortingTest {
 	private Integer[] vetorVazio = {};
 	private Integer[] vetorValoresRepetidos;
 	private Integer[] vetorValoresIguais;
+	private Integer[] vetorDesordenado;
+	private Integer[] vetorOrdenado;
+	private Integer[] vetorUnitario;
+	private Integer[] vetorDecrescente;
+	private Integer[] vetorNegativos;
 
 	public AbstractSorting<Integer> implementation;
 
@@ -29,7 +34,12 @@ public class StudentSortingTest {
 				11, 18, 36 });
 		populaVetorRepetido(new Integer[] { 4, 9, 3, 4, 0, 5, 1, 4 });
 		populaVetorIgual(new Integer[] { 6, 6, 6, 6, 6, 6 });
-
+		populaVetorDesordenado(new Integer[] {1, 5, 9, 0});
+		populaVetorOrdenado(new Integer[] {1, 2, 3, 18, 19, 21, 22});
+		populaVetorUnitario(new Integer[] {1});
+		populaVetorDecrescente(new Integer[] {22, 21, 19, 18, 3, 2, 1});
+		populaVetorNegativos(new Integer[] {-1, -3, -4, -10, -2});
+		
 		getImplementation();
 	}
 
@@ -39,7 +49,7 @@ public class StudentSortingTest {
 	 * do aluno
 	 */
 	private void getImplementation() {
-		this.implementation = new QuickSortMedianOfThree<>();
+		this.implementation = new MergeSort<>();
 	}
 
 	public void populaVetorTamanhoPar(Integer[] arrayPadrao) {
@@ -58,6 +68,31 @@ public class StudentSortingTest {
 	public void populaVetorIgual(Integer[] arrayPadrao) {
 		this.vetorValoresIguais = Arrays
 				.copyOf(arrayPadrao, arrayPadrao.length);
+	}
+
+	public void populaVetorDesordenado(Integer[] arrayPadrao) {
+		this.vetorDesordenado = Arrays
+			.copyOf(arrayPadrao, arrayPadrao.length);
+	}
+
+	public void populaVetorOrdenado(Integer[] arrayPadrao) {
+		this.vetorOrdenado = Arrays
+			.copyOf(arrayPadrao, arrayPadrao.length);
+	}
+
+	public void populaVetorUnitario(Integer[] arrayPadrao) {
+		this.vetorUnitario = Arrays
+			.copyOf(arrayPadrao, arrayPadrao.length);
+	}
+
+	public void populaVetorDecrescente(Integer[] arrayPadrao) {
+		this.vetorDecrescente = Arrays
+			.copyOf(arrayPadrao, arrayPadrao.length);
+	}
+
+	public void populaVetorNegativos(Integer[] arrayPadrao) {
+		this.vetorNegativos = Arrays
+			.copyOf(arrayPadrao, arrayPadrao.length);
 	}
 
 	// FIM DOS METODOS AUXILIARES DA INICIALIZAÇÃO
@@ -99,6 +134,31 @@ public class StudentSortingTest {
 		genericTest(vetorValoresRepetidos);
 	}
 
+	@Test
+	public void testDesordenado() {
+		genericTest(vetorDesordenado);
+	}
+
+	@Test
+	public void testOrdenado() {
+		genericTest(vetorOrdenado);
+	}
+
+	@Test
+	public void testUnitario() {
+		genericTest(vetorUnitario);
+	}
+
+	@Test
+	public void testDecrescente() {
+		genericTest(vetorDecrescente);
+	}
+
+	@Test
+	public void testNegativos() {
+		genericTest(vetorNegativos);
+	}
+	
 	// MÉTODOS QUE OS ALUNOS PODEM CRIAR
 	/**
 	 * O ALUNO PODE IMPLEMENTAR METODOS DE ORDENAÇÃO TESTANDO O SORT COM TRES
